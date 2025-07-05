@@ -48,8 +48,8 @@
   ansible.builtin.file:
     path: '/etc/unbound/unbound.conf.d/local-data.conf'
     state: absent
+  notify: 'Systemctl restart unbound'
   when: unbound__local_data is not defined or unbound__local_data | length == 0
-    
 
 - name: Transfer main unbound configuration
   become: true
