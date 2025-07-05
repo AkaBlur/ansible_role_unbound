@@ -10,6 +10,9 @@ unbound_access_control:
   - 'access-control: 127.0.0.1 allow'
   - 'access-control: ::1 allow'
 
+# list of optional local-data entries
+unbound__local_data: []
+
 unbound__state: 'present'
 
 # snippets for dns rebinding protection

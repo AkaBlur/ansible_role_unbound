@@ -32,6 +32,25 @@
   notify: 'Systemctl restart unbound'
   when: unbound__auto_trust_anchor | bool
 
+- name: Copy local-data entries
+  become: true
+  ansible.builtin.template:
+    src: 'templates/snippets/local-data.conf'
+    dest: '/etc/unbound/unbound.conf.d/'
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'
+  notify: 'Systemctl restart unbound'
+  when: unbound__local_data is defined and unbound__local_data | length > 0
+
+- name: Ensure local-data config file state
+  become: true
+  ansible.builtin.file:
+    path: '/etc/unbound/unbound.conf.d/local-data.conf'
+    state: absent
+  when: unbound__local_data is not defined or unbound__local_data | length == 0
+    
+
 - name: Transfer main unbound configuration
   become: true
   ansible.builtin.template:
@@ -42,3 +61,4 @@
     mode: 'u=rw,g=r,o=r'
     validate: unbound-checkconf %s
   notify: 'Systemctl restart unbound'
+...
