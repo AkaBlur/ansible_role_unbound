@@ -14,6 +14,7 @@ Variables
 | ``unbound_access_control``  | ``['access-control: 127.0.0.1 allow', 'access-control: ::1 allow']`` | define access control |
 | ``unbound__state`` | ``present`` | Package state. *(use ``latest`` for explicit update)*
 | ``submodules_versioncheck`` | ``false`` | run basic versions check. ``true`` is recomended. |
+| ``unbound__local_data`` | ``[]`` | Optional list of ``local-data`` entries to add into DNS configuration <br> e.g. "homeassistant.local A 10.10.0.22" |
 
 For more options have a look into the defaults/main.yml file.
 
